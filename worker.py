@@ -19,7 +19,7 @@ def server_thread():
     with lock:
       tmp = frame_tmp
     msg = pickle.dumps(tmp)
-    socket.send(10001, msg)  
+    socket.send(b'10001', msg)  
       
     
 def main_thread():
