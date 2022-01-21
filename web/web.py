@@ -4,6 +4,8 @@ import zmq
 import numpy as np
 import cv2
 
+import pickle
+
 from flask import Response
 from flask import Flask
 from flask import render_template

@@ -3,6 +3,7 @@ import time
 import zmq
 import numpy as np
 import cv2
+import pickle
 
 
 def server_thread():
