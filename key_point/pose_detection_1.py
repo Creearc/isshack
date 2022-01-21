@@ -79,7 +79,7 @@ def detect(image):
     #print(keypoints_with_scores)
     
     # Render keypoints 
-    loop_through_people(image, keypoints_with_scores, EDGES, 0.1)
+    loop_through_people(image, keypoints_with_scores, EDGES, 0.25)
 
     return image
     
