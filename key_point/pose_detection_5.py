@@ -30,7 +30,7 @@ def detect(img):
     (Height, Width) = img.shape[:2]
     blob = cv2.dnn.blobFromImage(img, scale, (416, 416), (0, 0, 0), True, crop=False)
     net.setInput(blob)
-    layer_outs = net.forward(layer)
+    outs = net.forward(get_output_layers(net))
     class_ids = []
     confidences = []
     boxes = []
