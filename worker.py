@@ -41,6 +41,7 @@ def main_thread():
       print(frame_count, frame_rate)
       w = int(vid_capture.get(cv2.CAP_PROP_FRAME_WIDTH))
       h = int(vid_capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
+      print('Go!')
 
       for i in range(0, frame_count, 24):
         vid_capture.set(1, i)
