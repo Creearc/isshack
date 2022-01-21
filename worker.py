@@ -14,7 +14,7 @@ from key_point import pose_detection_1 as detector
 def server_thread():
   global video_name, frame_tmp, lock
 
-  ip, port = '127.0.0.1', 5001
+  ip, port = '127.0.0.1', 5555
   sender = imagezmq.ImageSender(connect_to="tcp://{}:{}".format(ip, port))
   server = socket.gethostname()
   
