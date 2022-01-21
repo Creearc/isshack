@@ -4,8 +4,6 @@ import numpy as np
 net = cv2.dnn.readNetFromDarknet('key_point/model_5/yolov4.cfg',
                                  'key_point/model_5/yolov4.weights')
 
-Width = image.shape[1]
-Height = image.shape[0]
 scale = 0.00392
 
 conf_threshold = 0.5
@@ -29,7 +27,7 @@ def draw_prediction(img, class_id, confidence, x, y, x_plus_w, y_plus_h, classes
 
 
 def detect(img):
-    (H, W) = img.shape[:2]
+    (Height, Width) = img.shape[:2]
     blob = cv2.dnn.blobFromImage(img, scale, (416, 416), (0, 0, 0), True, crop=False)
     net.setInput(blob)
     layer_outs = net.forward(layer)
