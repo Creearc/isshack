@@ -4,6 +4,7 @@ import zmq
 import numpy as np
 import cv2
 import pickle
+import socket
 
 from key_point import pose_detection_1 as detector
 
@@ -11,15 +12,14 @@ from key_point import pose_detection_1 as detector
 def server_thread():
   global video_name, frame_tmp, lock
 
-  context = zmq.Context()
-  socket = context.socket(zmq.PUSH)
-  socket.bind("tcp://0.0.0.0:{}".format(5001))
+  ip, port = '127.0.0.1', 5001
+  sender = imagezmq.ImageSender(connect_to="tcp://{}:{}".format(ip, port))
+  server = socket.gethostname()
   
   while True:
     with lock:
       tmp = frame_tmp
-    msg = pickle.dumps(tmp)
-    socket.send(msg)  
+    sender.send_image(server, tmp)
       
     
 def main_thread():

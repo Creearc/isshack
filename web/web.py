@@ -25,13 +25,9 @@ def video_feed():
 def generate():
   global socket
   while True:
-    try:
-      msg = socket.recv(zmq.NOBLOCK)
-    except Exception as e:
-      print(e)
-      continue
+    (server, img) = imageHub.recv_image()
+    imageHub.send_reply(b'OK')
     
-    img = pickle.loads(msg)
     if img is None:
       time.sleep(0.1)
       continue
@@ -54,8 +50,6 @@ if __name__ == '__main__':
 
   ip = '127.0.0.1'
 
-  context = zmq.Context()
-  socket = context.socket(zmq.PULL)
-  socket.connect("tcp://{}:{}".format(ip, 5001))
+  imageHub = imagezmq.ImageHub()
   
   app.run(host='0.0.0.0', port=58800, debug=False, threaded=True, use_reloader=False)
