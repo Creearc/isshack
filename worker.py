@@ -5,7 +5,7 @@ import numpy as np
 import cv2
 import pickle
 
-from key_point import pose_detection_1 as detector
+from key_point import pose_detection_2 as detector
 
 
 def server_thread():
