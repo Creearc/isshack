@@ -16,7 +16,7 @@ def server_thread():
   socket.bind("tcp://0.0.0.0:{}".format(5001))
   
   while True:
-    msg = socket.recv(zmq.NOBLOCK)
+    msg = socket.recv()
     with lock:
       tmp = frame_tmp
     msg = pickle.dumps(tmp)
