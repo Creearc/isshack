@@ -36,6 +36,7 @@ def main_thread():
       vid_capture = cv2.VideoCapture(v)
       frame_count = int(vid_capture.get(cv2.CAP_PROP_FRAME_COUNT))
       frame_rate = int(vid_capture.get(cv2.CAP_PROP_FPS))
+      print(frame_count, frame_rate)
       w = int(vid_capture.get(cv2.CAP_PROP_FRAME_WIDTH))
       h = int(vid_capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
