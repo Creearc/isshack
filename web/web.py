@@ -26,7 +26,12 @@ def generate():
   global socket
   while True:
     socket.send_string('img$0', zmq.NOBLOCK)
-    msg = socket.recv(zmq.NOBLOCK)
+    try:
+      msg = socket.recv(zmq.NOBLOCK)
+    except Exception as e:
+      print(e)
+      continue
+    
     img = pickle.loads(msg)
     if img is None:
       time.sleep(0.1)
