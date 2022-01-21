@@ -25,8 +25,11 @@ def video_feed():
 def generate():
   global socket
   while True:
-    socket.send_string('img$0', zmq.NOBLOCK)
-    msg = socket.recv(zmq.NOBLOCK)
+    try:
+      socket.send_string('img$0', zmq.NOBLOCK)
+      msg = socket.recv(zmq.NOBLOCK)
+    except:
+      continue
     img = pickle.loads(msg)
     if img is None:
       time.sleep(0.1)
