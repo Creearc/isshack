@@ -12,14 +12,14 @@ def server_thread():
   global video_name, frame_tmp, lock
 
   context = zmq.Context()
-  socket = context.socket(zmq.PUB)
+  socket = context.socket(zmq.REP)
   socket.bind("tcp://0.0.0.0:{}".format(5001))
   
   while True:
     with lock:
       tmp = frame_tmp
     msg = pickle.dumps(tmp)
-    socket.send(10001, msg)  
+    socket.send(msg)  
       
     
 def main_thread():
