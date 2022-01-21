@@ -61,7 +61,7 @@ def detect(img):
         w = box[2]
         h = box[3]
         print(x, y, w, h)
-        image = draw_prediction(image, class_ids[i], confidences[i], round(x), round(y), round(x + w), round(y + h), classes, COLORS)
+        img = draw_prediction(img, class_ids[i], confidences[i], round(x), round(y), round(x + w), round(y + h), classes, COLORS)
 
             
     return img
