@@ -5,6 +5,8 @@ from matplotlib import pyplot as plt
 import numpy as np
 #import mediapipe as mp
 import time
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 EDGES = {
     (0, 1): 'm',
@@ -55,9 +57,9 @@ def draw_connections(frame, keypoints, edges, confidence_threshold):
             cv2.line(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0,255,0), 2)
 
 # Optional if you are using a GPU
-gpus = tf.config.experimental.list_physical_devices('GPU')
-for gpu in gpus:
-    tf.config.experimental.set_memory_growth(gpu, True)
+#gpus = tf.config.experimental.list_physical_devices('GPU')
+#for gpu in gpus:
+#    tf.config.experimental.set_memory_growth(gpu, True)
 
 model = hub.load('https://tfhub.dev/google/movenet/multipose/lightning/1')
 movenet = model.signatures['serving_default']
@@ -94,7 +96,7 @@ else:
     w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-    for i in range(frame_count):
+    for i in range(1600, frame_count, 10):
         if i % 100 == 0:
             print('{}%'.format(int(i / frame_count * 100)))
 
