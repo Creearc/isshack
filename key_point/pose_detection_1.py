@@ -64,7 +64,7 @@ movenet = model.signatures['serving_default']
 
 
 
-def detect(img):
+def detect(image):
     image = cv2.resize(image, (1280,768))
 
     img = image.copy()
