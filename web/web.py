@@ -4,6 +4,8 @@ import zmq
 import numpy as np
 import cv2
 
+import imagezmq
+
 import pickle
 
 from flask import Response

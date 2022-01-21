@@ -6,6 +6,8 @@ import cv2
 import pickle
 import socket
 
+import imagezmq
+
 from key_point import pose_detection_1 as detector
 
 
