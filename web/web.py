@@ -59,6 +59,6 @@ if __name__ == '__main__':
   socket = context.socket(zmq.SUB)
   socket.connect("tcp://{}:{}".format(ip, 5001))
   topicfilter = 10001
-  socket.(zmq.SUBSCRIBE, topicfilter)
+  socket.setsockopt(zmq.SUBSCRIBE, topicfilter)
   
   app.run(host='0.0.0.0', port=58800, debug=False, threaded=True, use_reloader=False)
