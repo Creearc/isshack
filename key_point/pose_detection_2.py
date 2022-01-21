@@ -1,10 +1,11 @@
 import cv2
 import numpy as np
 
-neural_network = cv2.dnn.readNetFromCaffe('model_2/MobileNetSSD_deploy.prototxt.txt', 
-        'model_2/MobileNetSSD_deploy.caffemodel')
+neural_network = cv2.dnn.readNetFromCaffe('key_point/model_2/MobileNetSSD_deploy.prototxt.txt', 
+        'key_point/model_2/MobileNetSSD_deploy.caffemodel')
 
 RESIZED_DIMENSIONS = (300, 300)
+IMG_NORM_RATIO = 0.007843
 file_size = (1920,1080) 
 
 categories = { 0: 'background', 1: 'aeroplane', 2: 'bicycle', 3: 'bird', 
