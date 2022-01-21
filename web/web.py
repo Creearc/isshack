@@ -26,7 +26,7 @@ def generate():
   global socket
   while True:
     try:
-      socket.send_string('img$0', zmq.NOBLOCK)
+      socket.send_string('img$0')
       msg = socket.recv()
     except Exception as e:
       print(e)
