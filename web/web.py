@@ -58,7 +58,7 @@ if __name__ == '__main__':
   context = zmq.Context()
   socket = context.socket(zmq.SUB)
   socket.connect("tcp://{}:{}".format(ip, 5001))
-  topicfilter = "img"
+  topicfilter = "1001"
   socket.setsockopt(zmq.SUBSCRIBE, topicfilter)
   
   app.run(host='0.0.0.0', port=58800, debug=False, threaded=True, use_reloader=False)
