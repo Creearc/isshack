@@ -48,7 +48,7 @@ def main_thread():
         if frame is None:
           continue
         
-        frame = detector(frame)
+        frame = detector.detect(frame)
         with lock:
           frame_tmp = frame.copy()
       with lock:
