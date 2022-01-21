@@ -19,7 +19,7 @@ def server_thread():
     with lock:
       tmp = frame_tmp
     msg = pickle.dumps(tmp)
-    socket.send(msg)  
+    socket.send('img', msg)  
       
     
 def main_thread():
