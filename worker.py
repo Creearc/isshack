@@ -20,7 +20,7 @@ def server_thread():
     with lock:
       tmp = frame_tmp
     msg = pickle.dumps(tmp)
-    socket.send(msg)  
+    socket.send(msg, zmq.NOBLOCK)  
       
     
 def main_thread():
