@@ -17,7 +17,7 @@ def server_thread():
     task, data = msg.split('$')
     if task == 'path':
       with lock:
-        video_name = data
+        video_name = '{}/{}'.format(FOLDER_PATH, data)
       socket.send_string('1', zmq.NOBLOCK)
     elif task == 'img':
       with lock:
@@ -46,13 +46,18 @@ def main_thread():
 
         with lock:
           frame_tmp = frame.copy()
+      with lock:
+        video_name = None
+        
+    time.sleep(0.02)
 
 
 if __name__ == '__main__':
+  FOLDER_PATH = 'tmp'
   lock = threading.Lock()
 
   video_name = None
-  video_name = 'fight_train.mp4'
+  video_name = '{}/fight_train.mp4'.format(FOLDER_PATH)
 
   frame_tmp = None
   
