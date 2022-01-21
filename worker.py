@@ -40,7 +40,7 @@ def main_thread():
       w = int(vid_capture.get(cv2.CAP_PROP_FRAME_WIDTH))
       h = int(vid_capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-      for i in range(0, frame_count, 10):
+      for i in range(0, frame_count, 240):
         vid_capture.set(1, i)
         _, frame = vid_capture.read()
         if frame is None:
