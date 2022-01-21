@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 net = cv2.dnn.readNetFromDarknet('key_point/model_5/yolov4.cfg',
                                  'key_point/model_5/yolov4.weights')
