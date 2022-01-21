@@ -16,7 +16,7 @@ def get_output_layers(net):
     return output_layers
 
 
-def draw_prediction(img, class_id, confidence, x, y, x_plus_w, y_plus_h, classes, COLORS):
+def draw_prediction(img, class_id, confidence, x, y, x_plus_w, y_plus_h):
     label = str(classes[class_id])
     out = img[y : y_plus_h, x : x_plus_w].copy()
     cv2.rectangle(img, (x, y), (x_plus_w, y_plus_h), (255, 255, 255), 2)
@@ -60,7 +60,8 @@ def detect(img):
         w = box[2]
         h = box[3]
         print(x, y, w, h)
-        img = draw_prediction(img, class_ids[i], confidences[i], round(x), round(y), round(x + w), round(y + h), classes, COLORS)
+        img = draw_prediction(img, class_ids[i], confidences[i],
+                              round(x), round(y), round(x + w), round(y + h))
 
             
     return img
