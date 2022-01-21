@@ -26,8 +26,7 @@ def generate():
   global socket
   while True:
     try:
-      socket.send_string('img$0')
-      msg = socket.recv(zmq.NOBLOCK)
+      msg = socket.recv()
     except Exception as e:
       print(e)
       continue
@@ -56,7 +55,7 @@ if __name__ == '__main__':
   ip = '127.0.0.1'
 
   context = zmq.Context()
-  socket = context.socket(zmq.REQ)
+  socket = context.socket(zmq.PULL)
   socket.connect("tcp://{}:{}".format(ip, 5001))
   
   app.run(host='0.0.0.0', port=58800, debug=False, threaded=True, use_reloader=False)
