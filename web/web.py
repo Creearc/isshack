@@ -25,8 +25,8 @@ def video_feed():
 def generate():
   global socket
   while True:
-    socket.send_string('img$0', zmq.NOBLOCK)
     try:
+      socket.send_string('img$0', zmq.NOBLOCK)
       msg = socket.recv(zmq.NOBLOCK)
     except Exception as e:
       print(e)
