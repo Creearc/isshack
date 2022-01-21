@@ -69,7 +69,8 @@ def detect(image):
 
     img = image.copy()
 
-    img = tf.image.resize_with_pad(tf.expand_dims(img, axis=0), 512,512)
+    #img = tf.image.resize_with_pad(tf.expand_dims(img, axis=0), 192,320)
+    img = tf.image.resize_with_pad(tf.expand_dims(img, axis=0), 384,640)
     input_img = tf.cast(img, dtype=tf.int32)
     
     # Detection section
