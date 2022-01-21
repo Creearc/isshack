@@ -5,6 +5,8 @@ import numpy as np
 import cv2
 import pickle
 
+from key_point import pose_detection_1 as detector
+
 
 def server_thread():
   global video_name, frame_tmp, lock
@@ -40,12 +42,13 @@ def main_thread():
       w = int(vid_capture.get(cv2.CAP_PROP_FRAME_WIDTH))
       h = int(vid_capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-      for i in range(0, frame_count, 240):
+      for i in range(0, frame_count, 24):
         vid_capture.set(1, i)
         _, frame = vid_capture.read()
         if frame is None:
           continue
-
+        
+        frame = detector(frame)
         with lock:
           frame_tmp = frame.copy()
       with lock:
