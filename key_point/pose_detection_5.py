@@ -20,7 +20,7 @@ def draw_prediction(img, class_id, confidence, x, y, x_plus_w, y_plus_h):
     label = str(class_id)
     out = img[y : y_plus_h, x : x_plus_w].copy()
     cv2.rectangle(img, (x, y), (x_plus_w, y_plus_h), (255, 255, 255), 2)
-    cv2.putText(img, label, (x - 10, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+    cv2.putText(img, label, (x - 10, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
     return img
 
 
