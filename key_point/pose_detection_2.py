@@ -20,6 +20,7 @@ classes =  ["background", "aeroplane", "bicycle", "bird", "boat", "bottle",
            "diningtable",  "dog", "horse", "motorbike", "person", 
            "pottedplant", "sheep", "sofa", "train", "tvmonitor"]
  
+bbox_colors = np.random.uniform(255, 0, size=(len(categories), 3))
 
 def detect(frame):
     (h, w) = frame.shape[:2]
