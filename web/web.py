@@ -26,7 +26,7 @@ def generate():
   global socket
   while True:
     try:
-      msg = socket.recv()
+      msg = socket.recv(zmq.NOBLOCK)
     except Exception as e:
       print(e)
       continue
