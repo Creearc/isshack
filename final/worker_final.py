@@ -51,8 +51,9 @@ def main_thread():
         frame, key_points = detector.detect(frame)
         state = nikita_net.run(key_points)
 
-        cv2.putText(frame, 'ALARM!', (20, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
-                    (0, 0, 255), 2)
+        if state == 1:
+          cv2.putText(frame, 'ALARM!', (20, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
+                      (0, 0, 255), 2)
         
         if state != old_state:
           sec = i // frame_rate
