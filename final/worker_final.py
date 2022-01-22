@@ -52,13 +52,12 @@ def main_thread():
         if key_points is None:
           continue        
         state = nikita_net.run(key_points)
-        print(state)
 
         if state == 1:
           cv2.putText(frame, 'ALARM!', (20, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
                       (0, 0, 255), 2)
         
-        if state != old_state and buf_sec > 0 :
+        if state != old_state and i // frame_rate > 0 :
           sec = i // frame_rate
           output_file.write('{} {} {}\n'.format(buf_sec, sec, old_state))
           buf_sec = sec
