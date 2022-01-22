@@ -6,7 +6,7 @@ import cv2
 import pickle
 
 import pose_estimation_tf_module as detector
-#import nikita_net
+import nikita_net
 
 def server_thread():
   global video_name, frame_tmp, lock
