@@ -41,7 +41,7 @@ def main_thread():
       buf_sec = 0
       output_file = open('results/fight_result.txt', 'w')
       
-      for i in range(0, 240*100, 240):
+      for i in range(0, 240*50, 240):
         print('{}%'.format(int(i / frame_count * 100)))
         vid_capture.set(1, i)
         _, frame = vid_capture.read()
@@ -49,7 +49,10 @@ def main_thread():
           continue
         
         frame, key_points = detector.detect(frame)
+        if key_points is None:
+          continue        
         state = nikita_net.run(key_points)
+        print(state)
 
         if state == 1:
           cv2.putText(frame, 'ALARM!', (20, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6,

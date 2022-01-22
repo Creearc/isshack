@@ -44,6 +44,6 @@ def run(kp):
     trained_model.eval()
     kp = prep_ds(kp)
     res = trained_model(torch.FloatTensor([kp]))
-    return(torch.round(res).detach().numpy()[0])
+    return int(torch.round(res).detach().numpy()[0][0])
 
 
