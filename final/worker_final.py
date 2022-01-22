@@ -11,9 +11,9 @@ import nikita_net
 import tensorflow as tf
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
-gpus = tf.config.experimental.list_physical_devices('GPU')
-for gpu in gpus:
-    tf.config.experimental.set_memory_growth(gpu, True)
+##gpus = tf.config.experimental.list_physical_devices('GPU')
+##for gpu in gpus:
+##    tf.config.experimental.set_memory_growth(gpu, True)
 
 def server_thread():
   global video_name, frame_tmp, lock
