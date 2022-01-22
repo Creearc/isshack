@@ -85,6 +85,7 @@ def detect(image):
 
 def data_prep(keypoints_with_scores, min_conf):
     new_kp_frame = []
+    
     for person in keypoints_with_scores:
         mean_conf = 0
         people = []
@@ -95,18 +96,15 @@ def data_prep(keypoints_with_scores, min_conf):
         mean_conf = mean_conf/len(person)
         if mean_conf > min_conf:
             new_kp_frame.append(people)
-  
-    #new_kp_frame = [sec, new_kp_frame]
+    
+    if new_kp_frame == []: return None
+    
     data = functions.padding(new_kp_frame, size=10)
     return data
 
 
 if __name__ == '__main__':
     os.environ['CUDA_VISIBLE_DEVICES'] = '0'
-
-    gpus = tf.config.experimental.list_physical_devices('GPU')
-    for gpu in gpus:
-        tf.config.experimental.set_memory_growth(gpu, True)
 
     # optional if you are using a GPU
     gpus = tf.config.experimental.list_physical_devices('GPU')
