@@ -40,9 +40,14 @@ def main_thread():
       state, old_state = 0, 0
       buf_sec = 0
       output_file = open('results/fight_result.txt', 'w')
+
+      per, old_per = 0, 0
       
       for i in range(0, 240*100, 240):
-        print('{}%'.format(int(i / frame_count * 100)))
+        per = int(i / frame_count * 100)
+        if per != old_per:
+          print('{}%'.format(per))
+          old_per = per
         vid_capture.set(1, i)
         _, frame = vid_capture.read()
         if frame is None:
