@@ -4,7 +4,6 @@ import cv2
 #from matplotlib import pyplot as plt
 import numpy as np
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 import pickle
 import pprint
 import functions
@@ -30,9 +29,6 @@ EDGES = {
     (14, 16): 'c'
 }
 
-gpus = tf.config.experimental.list_physical_devices('GPU')
-for gpu in gpus:
-    tf.config.experimental.set_memory_growth(gpu, True)
 # load MoveNet model
 model = hub.load('https://tfhub.dev/google/movenet/multipose/lightning/1')
 movenet = model.signatures['serving_default']
@@ -102,6 +98,11 @@ def data_prep(keypoints_with_scores, min_conf):
 
 
 if __name__ == '__main__':
+    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+
+    gpus = tf.config.experimental.list_physical_devices('GPU')
+    for gpu in gpus:
+        tf.config.experimental.set_memory_growth(gpu, True)
 
     # optional if you are using a GPU
     gpus = tf.config.experimental.list_physical_devices('GPU')
