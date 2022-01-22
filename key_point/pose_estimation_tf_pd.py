@@ -161,8 +161,8 @@ for i in range(0, frame_count, 240):
     #loop_through_people(frame, keypoints_with_scores, EDGES, 0.2)
     #cv2.imshow('Movenet Multipose', frame)
     
-    if cv2.waitKey(1) & 0xFF==ord('q'):
-        break
+    #if cv2.waitKey(1) & 0xFF==ord('q'):
+    #    break
 
 
 with open('data.pickle', 'wb') as f:
