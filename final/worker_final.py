@@ -49,7 +49,6 @@ def main_thread():
           continue
         
         frame, key_points = detector.detect(frame)
-        print(key_points)
         state = nikita_net.run(key_points)
 
         cv2.putText(frame, 'ALARM!', (20, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
