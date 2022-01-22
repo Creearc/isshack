@@ -43,7 +43,7 @@ def main_thread():
 
       per, old_per = 0, 0
       
-      for i in range(0, 240*100, 240):
+      for i in range(0, frame_count, 240):
         per = int(i / frame_count * 100)
         if per != old_per:
           print('{}%'.format(per))
