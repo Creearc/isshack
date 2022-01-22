@@ -6,7 +6,7 @@ import numpy as np
 #import mediapipe as mp
 import time
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+#os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 #import pandas as pd
 import pickle
 
