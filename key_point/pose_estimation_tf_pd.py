@@ -166,7 +166,7 @@ for i in range(0, frame_count, 240):
     #if cv2.waitKey(1) & 0xFF==ord('q'):
     #    break
 
-if out is not None:
+if out != []:
     with open('data.pickle', 'wb') as f:
         pickle.dump(out, f)
 else:
