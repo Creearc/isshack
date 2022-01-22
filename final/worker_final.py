@@ -39,7 +39,7 @@ def main_thread():
 
       state, old_state = 0, 0
       buf_sec = 0
-      output_file = open('train/fight_result.txt', 'w')
+      output_file = open('results/fight_result.txt', 'w')
       
       for i in range(0, frame_count, 240):
         vid_capture.set(1, i)
