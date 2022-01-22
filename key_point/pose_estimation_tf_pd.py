@@ -47,6 +47,8 @@ def padding(data, size=10):
   start_size = len(people)
   for i in range(size - start_size):
     people.append(people[i])
+  for i in range(start_size - size):
+    people.pop(-1)
   return [sec, people]
 
 # Function to loop through each person detected and render
@@ -140,7 +142,7 @@ for i in range(0, frame_count, 240):
     sec += 1
 
     #print(new_kp_frame)
-    if new_kp_frame == []: continue
+    if new_kp_frame[1] == []: continue
 
     data = padding(new_kp_frame, size=10)
     
