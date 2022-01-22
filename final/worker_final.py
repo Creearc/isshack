@@ -41,7 +41,7 @@ def main_thread():
       buf_sec = 0
       output_file = open('results/fight_result.txt', 'w')
       
-      for i in range(0, 240*5, 240):
+      for i in range(0, 240*100, 240):
         print('{}%'.format(int(i / frame_count * 100)))
         vid_capture.set(1, i)
         _, frame = vid_capture.read()
@@ -68,6 +68,7 @@ def main_thread():
         video_name = None
         
       output_file.close()
+      print('Done!')
         
     time.sleep(0.02)
 
