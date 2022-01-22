@@ -10,7 +10,7 @@ def shift(people):
   
   return out
 
-def pavel_padding(people, size=10):
+def padding(people, size=10):
   start_size = len(people)
   for i in range(size - start_size):
     people.append(people[i])
