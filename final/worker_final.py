@@ -32,7 +32,6 @@ def main_thread():
       vid_capture = cv2.VideoCapture(v)
       frame_count = int(vid_capture.get(cv2.CAP_PROP_FRAME_COUNT))
       frame_rate = int(vid_capture.get(cv2.CAP_PROP_FPS))
-      print(frame_count, frame_rate)
       w = int(vid_capture.get(cv2.CAP_PROP_FRAME_WIDTH))
       h = int(vid_capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
       print('Go!')
@@ -42,8 +41,12 @@ def main_thread():
       output_file = open('results/fight_result.txt', 'w')
 
       per, old_per = 0, -1
+
+      first_frame = 0
+      last_frame = frame_count
+      step = 240
       
-      for i in range(0, frame_count, 240):
+      for i in range(first_frame, last_frame, step):
         per = int(i / frame_count * 100)
         if per != old_per:
           print('{}%'.format(per))
@@ -62,7 +65,7 @@ def main_thread():
           cv2.putText(frame, 'ALARM!', (20, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
                       (0, 0, 255), 2)
         
-        if state != old_state and i // frame_rate > 0 :
+        if state != old_state and i // frame_rate > 0 or i + step >= last_frame:
           sec = i // frame_rate
           output_file.write('{} {} {}\n'.format(buf_sec, sec, old_state))
           buf_sec = sec
