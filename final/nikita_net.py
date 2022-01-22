@@ -29,7 +29,7 @@ class NClassifier(nn.Module):
         return x
 
 def prep_ds(a):
-        for j in range(0,10):
+        for j in range(0,len(a)):
             a[j] = np.concatenate(a[j])
         a = np.concatenate(a)
         return(a)
