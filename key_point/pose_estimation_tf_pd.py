@@ -100,6 +100,7 @@ w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
 sec = 0
+out = []
 #for i in range(0, 4800, 240):
 for i in range(0, frame_count, 240):
     if i % 100 == 0:
@@ -141,8 +142,9 @@ for i in range(0, frame_count, 240):
     data = padding(new_kp_frame, size=10)
     #print(data)
     data = shift(data)
-    print(data)
+    #print(data)
 
+    out = out + data 
     '''
     for fr in data:
         print(fr)
@@ -164,9 +166,11 @@ for i in range(0, frame_count, 240):
     #if cv2.waitKey(1) & 0xFF==ord('q'):
     #    break
 
-
-with open('data.pickle', 'wb') as f:
-    pickle.dump(data, f)
+if out is not None:
+    with open('data.pickle', 'wb') as f:
+        pickle.dump(out, f)
+else:
+    print('something bad has happened')
 
 #print(resultList)
 #resultList.to_csv("res.csv")
