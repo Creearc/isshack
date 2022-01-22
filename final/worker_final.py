@@ -73,7 +73,7 @@ def main_thread():
 
 
 if __name__ == '__main__':
-  FOLDER_PATH = 'tmp'
+  FOLDER_PATH = '../tmp'
   lock = threading.Lock()
 
   video_name = None
