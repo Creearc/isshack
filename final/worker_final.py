@@ -5,7 +5,8 @@ import numpy as np
 import cv2
 import pickle
 
-from key_point import pose_detection_1 as detector
+import pose_estimation_tf_module as detector
+import nikita_net
 
 
 def server_thread():
