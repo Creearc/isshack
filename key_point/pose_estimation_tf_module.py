@@ -68,10 +68,9 @@ def detect(image):
     # Detection section
     results = movenet(input_img)
     keypoints_with_scores = results['output_0'].numpy()[:,:,:51].reshape((6,17,3))
-    if new_kp_frame != []:
-        new_kp_frame = data_prep(keypoints_with_scores, 0.2)
-    else:
-        new_kp_frame = None
+    
+    new_kp_frame = data_prep(keypoints_with_scores, 0.2)
+
     #print(keypoints_with_scores)
     
     # Render keypoints 
@@ -81,20 +80,22 @@ def detect(image):
 
 def data_prep(keypoints_with_scores, min_conf):
     new_kp_frame = []
-    for person in keypoints_with_scores:
-        mean_conf = 0
-        people = []
-        for kp in person:
-            ky, kx, kp_conf = kp
-            mean_conf = mean_conf + kp_conf
-            people.append([ky, kx]) 
-        mean_conf = mean_conf/len(person)
-        if mean_conf > min_conf:
-            new_kp_frame.append(people)
-  
-    #new_kp_frame = [sec, new_kp_frame]
-    data = functions.padding(new_kp_frame, size=10)
-    return data
+    if keypoints_with_scores != []:
+        for person in keypoints_with_scores:
+            mean_conf = 0
+            people = []
+            for kp in person:
+                ky, kx, kp_conf = kp
+                mean_conf = mean_conf + kp_conf
+                people.append([ky, kx]) 
+            mean_conf = mean_conf/len(person)
+            if mean_conf > min_conf:
+                new_kp_frame.append(people)
+        #new_kp_frame = [sec, new_kp_frame]
+        data = functions.padding(new_kp_frame, size=10)
+        return data
+    else:
+        data = None
 
 
 if __name__ == '__main__':
