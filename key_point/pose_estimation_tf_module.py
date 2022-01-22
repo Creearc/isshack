@@ -122,9 +122,6 @@ if __name__ == '__main__':
         frame, new_kp_frame = detect(frame)
         #pprint.pprint(new_kp_frame)
         
-        with open('test_frame.pickle', 'wb') as f:
-            pickle.dump(new_kp_frame, f)
-        
         # Render keypoints 
         cv2.imshow('Movenet Multipose', frame)
         
