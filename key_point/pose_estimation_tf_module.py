@@ -105,7 +105,7 @@ if __name__ == '__main__':
     movenet = model.signatures['serving_default']
 
     # set video path
-    video_path = 'D:/hackathon/ISShack/train_dataset/fight_train.mp4'
+    video_path = '../tmp/fight_train.mp4'
     cap = cv2.VideoCapture(video_path)
     # chose start frame
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
