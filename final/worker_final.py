@@ -62,8 +62,11 @@ def main_thread():
         state = nikita_net.run(key_points)
 
         if state == 1:
-          cv2.putText(frame, 'ALARM!', (20, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
+          cv2.putText(frame, 'ALARM!', (70, 70), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
                       (0, 0, 255), 2)
+
+          cv2.rectangle(frame, (0, 0), (w, h),
+                        (0, 0, 255), 25)
         
         if state != old_state and i // frame_rate > 0 or i + step >= last_frame:
           sec = i // frame_rate
