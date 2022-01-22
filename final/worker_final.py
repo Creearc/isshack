@@ -41,7 +41,7 @@ def main_thread():
       buf_sec = 0
       output_file = open('results/fight_result.txt', 'w')
       
-      for i in range(0, 240*50, 240):
+      for i in range(0, 240*100, 240):
         print('{}%'.format(int(i / frame_count * 100)))
         vid_capture.set(1, i)
         _, frame = vid_capture.read()
@@ -58,7 +58,7 @@ def main_thread():
           cv2.putText(frame, 'ALARM!', (20, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
                       (0, 0, 255), 2)
         
-        if state != old_state:
+        if state != old_state and buf_sec > 0 :
           sec = i // frame_rate
           output_file.write('{} {} {}\n'.format(buf_sec, sec, old_state))
           buf_sec = sec
