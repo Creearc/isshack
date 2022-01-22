@@ -128,6 +128,7 @@ for i in range(0, frame_count, 240):
     
     new_kp_frame = []
 
+    '''
     for person in keypoints_with_scores:
         mean_conf = 0
         for kp in person:
@@ -137,6 +138,17 @@ for i in range(0, frame_count, 240):
         mean_conf = mean_conf/len(person)
         if mean_conf > 0.2:
             new_kp_frame.append(person)
+    '''
+    for person in keypoints_with_scores:
+        mean_conf = 0
+        people = []
+        for kp in person:
+            ky, kx, kp_conf = kp
+            mean_conf = mean_conf + kp_conf
+            people.append([ky, kx]) 
+        mean_conf = mean_conf/len(person)
+        if mean_conf > 0.2:
+            new_kp_frame.append(people)
 
     new_kp_frame = [sec, new_kp_frame]
     sec += 1
@@ -183,4 +195,4 @@ else:
 #resultList.to_csv("res.csv")
 
 cap.release()
-cv2.destroyAllWindows()
+#cv2.destroyAllWindows()
