@@ -41,7 +41,7 @@ def main_thread():
       buf_sec = 0
       output_file = open('results/fight_result.txt', 'w')
 
-      per, old_per = 0, 0
+      per, old_per = 0, -1
       
       for i in range(0, frame_count, 240):
         per = int(i / frame_count * 100)
