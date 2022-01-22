@@ -84,8 +84,7 @@ def draw_connections(frame, keypoints, edges, confidence_threshold):
 model = hub.load('https://tfhub.dev/google/movenet/multipose/lightning/1')
 movenet = model.signatures['serving_default']
 
-image_path = 'D:/hackathon/ISShack/train_dataset/6.jpg'
-video_path = 'D:/hackathon/ISShack/train_dataset/fight_train.mp4'
+video_path = '../fight_train.mp4'
 if_image = not True
 
 #res_line = {'sec':[], 'p1':[], 'p2':[], 'p3':[], 'p4':[], 'p5':[], 'p6':[], 'p7':[], 'p8':[], 'p9':[], 'p10': []}
