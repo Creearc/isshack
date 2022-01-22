@@ -43,7 +43,7 @@ def run(kp):
     global trained_model
     trained_model.eval()
     kp = prep_ds(kp)
-    res = trained_model(torch.FloatTensor(kp))
-    return(torch.round(res).detach().numpy()[0])
+    res = trained_model(torch.FloatTensor([kp]))
+    return int(torch.round(res).detach().numpy()[0][0])
 
 

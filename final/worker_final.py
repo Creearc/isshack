@@ -6,7 +6,7 @@ import cv2
 import pickle
 
 import pose_estimation_tf_module as detector
-#import nikita_net
+import nikita_net
 
 def server_thread():
   global video_name, frame_tmp, lock
@@ -41,18 +41,22 @@ def main_thread():
       buf_sec = 0
       output_file = open('results/fight_result.txt', 'w')
       
-      for i in range(0, frame_count, 240):
-        print(i)
+      for i in range(0, 240*50, 240):
+        print('{}%'.format(int(i / frame_count * 100)))
         vid_capture.set(1, i)
         _, frame = vid_capture.read()
         if frame is None:
           continue
         
         frame, key_points = detector.detect(frame)
+        if key_points is None:
+          continue        
         state = nikita_net.run(key_points)
+        print(state)
 
-        cv2.putText(frame, 'ALARM!', (20, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
-                    (0, 0, 255), 2)
+        if state == 1:
+          cv2.putText(frame, 'ALARM!', (20, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
+                      (0, 0, 255), 2)
         
         if state != old_state:
           sec = i // frame_rate
@@ -67,6 +71,7 @@ def main_thread():
         video_name = None
         
       output_file.close()
+      print('Done!')
         
     time.sleep(0.02)
 
