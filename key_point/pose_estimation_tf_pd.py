@@ -159,9 +159,8 @@ for i in range(0, frame_count, 240):
 
     
     # Render keypoints 
-    loop_through_people(frame, keypoints_with_scores, EDGES, 0.2)
-    
-    cv2.imshow('Movenet Multipose', frame)
+    #loop_through_people(frame, keypoints_with_scores, EDGES, 0.2)
+    #cv2.imshow('Movenet Multipose', frame)
     
     if cv2.waitKey(1) & 0xFF==ord('q'):
         break
