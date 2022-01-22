@@ -6,7 +6,7 @@ import numpy as np
 #import mediapipe as mp
 import time
 import os
-#os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 #import pandas as pd
 import pickle
 
@@ -77,9 +77,9 @@ def draw_connections(frame, keypoints, edges, confidence_threshold):
             cv2.line(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0,255,0), 2)
 
 # Optional if you are using a GPU
-#gpus = tf.config.experimental.list_physical_devices('GPU')
-#for gpu in gpus:
-#    tf.config.experimental.set_memory_growth(gpu, True)
+gpus = tf.config.experimental.list_physical_devices('GPU')
+for gpu in gpus:
+    tf.config.experimental.set_memory_growth(gpu, True)
 
 model = hub.load('https://tfhub.dev/google/movenet/multipose/lightning/1')
 movenet = model.signatures['serving_default']
@@ -139,8 +139,11 @@ for i in range(0, frame_count, 240):
     sec += 1
 
     #print(new_kp_frame)
+    if new_kp_frame == []: continue
     data = padding(new_kp_frame, size=10)
+    
     #print(data)
+
     data = shift(data)
     #print(data)
 
