@@ -131,6 +131,7 @@ for i in range(0, frame_count, 240):
         for kp in person:
             ky, kx, kp_conf = kp
             mean_conf = mean_conf + kp_conf
+            #np.append(people, [ky, kx]) 
         mean_conf = mean_conf/len(person)
         if mean_conf > 0.2:
             new_kp_frame.append(person)
@@ -139,7 +140,8 @@ for i in range(0, frame_count, 240):
     sec += 1
 
     #print(new_kp_frame)
-    if new_kp_frame == []: continue
+    if new_kp_frame[1] == []: continue
+
     data = padding(new_kp_frame, size=10)
     
     #print(data)
