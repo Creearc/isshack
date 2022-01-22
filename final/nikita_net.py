@@ -36,6 +36,8 @@ def prep_ds(a):
 
 trained_model = NClassifier()
 trained_model.load_state_dict(torch.load('saved_model.pth'))
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+trained_model.to(device)
 
 def run(kp):
     global trained_model
