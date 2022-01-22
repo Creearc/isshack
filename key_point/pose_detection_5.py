@@ -3,8 +3,10 @@ import numpy as np
 import os
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
-net = cv2.dnn.readNetFromDarknet('key_point/model_5/yolov4.cfg',
-                                 'key_point/model_5/yolov4.weights')
+##net = cv2.dnn.readNetFromDarknet('key_point/model_5/yolov4.cfg',
+##                                 'key_point/model_5/yolov4.weights')
+net = cv2.dnn.readNetFromDarknet('key_point/model_5_1/yolov4-sam-mish.cfg',
+                                 'key_point/model_5_1/yolov4-sam-mish.weights')
 
 net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
 net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
