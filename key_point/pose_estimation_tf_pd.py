@@ -139,8 +139,11 @@ for i in range(0, frame_count, 240):
     sec += 1
 
     #print(new_kp_frame)
+    if new_kp_frame == []: continue
     data = padding(new_kp_frame, size=10)
+    
     #print(data)
+
     data = shift(data)
     #print(data)
 
