@@ -87,11 +87,11 @@ def main_thread():
 
 
 if __name__ == '__main__':
-  FOLDER_PATH = '../tmp'
+  FOLDER_PATH = '../train'
   lock = threading.Lock()
 
   video_name = None
-  video_name = '{}/fight_train.mp4'.format(FOLDER_PATH)
+  video_name = '{}/fight_test.mp4'.format(FOLDER_PATH)
 
   frame_tmp = None
   
