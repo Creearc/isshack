@@ -81,7 +81,7 @@ def main_thread():
         video_name = None
 
       
-      sec = i // frame_rate
+      sec = frame_count // frame_rate
       output_file.write('{} {} {}\n'.format(buf_sec, sec, old_state))
            
       output_file.close()
