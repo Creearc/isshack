@@ -44,7 +44,7 @@ def main_thread():
 
       first_frame = 0
       last_frame = frame_count
-      step = 240
+      step = frame_rate
       
       for i in range(first_frame, last_frame, step):
         per = int(i / frame_count * 100)
