@@ -79,7 +79,11 @@ def main_thread():
           
       with lock:
         video_name = None
-        
+
+      
+      sec = i // frame_rate
+      output_file.write('{} {} {}\n'.format(buf_sec, sec, old_state))
+           
       output_file.close()
       print('Done!')
         
