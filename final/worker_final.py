@@ -82,7 +82,7 @@ def main_thread():
 
       
       sec = frame_count // frame_rate
-      output_file.write('{} {} {}\n'.format(buf_sec, sec, old_state))
+      output_file.write('{} {} {}\n'.format(buf_sec, sec, state))
            
       output_file.close()
       print('Done!')
