@@ -43,7 +43,7 @@ def main_thread():
       per, old_per = 0, -1
 
       first_frame = 0
-      last_frame = 180 * frame_rate#frame_count
+      last_frame = frame_count
       step = 240
       
       for i in range(first_frame, last_frame, step):
