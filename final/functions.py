@@ -23,22 +23,24 @@ def padding(people, size=10):
 if __name__ == '__main__':
   import pprint
   data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-  data = pavel_padding(data, size=10)
+  data = padding(data, size=10)
   data = shift(data)
   pprint.pprint(data)
 
   data = [1, 2, 3]
-  data = pavel_padding(data, size=10)
+  pprint.pprint(data)
+  data = padding(data, size=10)
+  pprint.pprint(data)
   data = shift(data)
   pprint.pprint(data)
 
   data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-  data = pavel_padding(data, size=10)
+  data = padding(data, size=10)
   data = shift(data)
   pprint.pprint(data)
 
   data = [1]
-  data = pavel_padding(data, size=10)
+  data = padding(data, size=10)
   data = shift(data)
   pprint.pprint(data)
 
