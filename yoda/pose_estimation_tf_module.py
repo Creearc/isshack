@@ -114,8 +114,7 @@ if __name__ == '__main__':
     # chose start frame
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     out = []
-    #for i in range(0, frame_count, 240):
-    for i in range(0, 240, 240):
+    for i in range(0, frame_count, 1):
 
         cap.set(1, i)
         _, frame = cap.read()
