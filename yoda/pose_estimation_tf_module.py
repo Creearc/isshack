@@ -7,7 +7,6 @@ import os
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 import pickle
 import pprint
-import functions
 
 EDGES = {
     (0, 1): 'm',
@@ -96,6 +95,7 @@ def data_prep(keypoints_with_scores, min_conf):
     data = functions.padding(new_kp_frame, size=10)
     return data
         
+
 
 if __name__ == '__main__':
 
