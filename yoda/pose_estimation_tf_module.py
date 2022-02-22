@@ -68,7 +68,7 @@ def detect(image):
     results = movenet(input_img)
     keypoints_with_scores = results['output_0'].numpy()[:,:,:51].reshape((6,17,3))
     
-    new_kp_frame = data_prep(keypoints_with_scores, 0.2)
+    #new_kp_frame = data_prep(keypoints_with_scores, 0.2)
     #print(keypoints_with_scores)
     
     # Render keypoints 
