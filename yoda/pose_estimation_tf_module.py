@@ -4,9 +4,9 @@ import cv2
 #from matplotlib import pyplot as plt
 import numpy as np
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 import pickle
 import pprint
+import functions
 
 EDGES = {
     (0, 1): 'm',
@@ -28,6 +28,14 @@ EDGES = {
     (12, 14): 'c',
     (14, 16): 'c'
 }
+
+gpus = tf.config.experimental.list_physical_devices('GPU')
+for gpu in gpus:
+    tf.config.experimental.set_memory_growth(gpu, True)
+        
+# load MoveNet model
+model = hub.load('https://tfhub.dev/google/movenet/multipose/lightning/1')
+movenet = model.signatures['serving_default']
 
 # Function to loop through each person detected and render
 def loop_through_people(frame, keypoints_with_scores, edges, confidence_threshold):
@@ -67,8 +75,7 @@ def detect(image):
     # Detection section
     results = movenet(input_img)
     keypoints_with_scores = results['output_0'].numpy()[:,:,:51].reshape((6,17,3))
-    
-    #new_kp_frame = data_prep(keypoints_with_scores, 0.2)
+    new_kp_frame = data_prep(keypoints_with_scores, 0.2)
     #print(keypoints_with_scores)
     
     # Render keypoints 
@@ -94,10 +101,10 @@ def data_prep(keypoints_with_scores, min_conf):
     
     data = functions.padding(new_kp_frame, size=10)
     return data
-        
 
 
 if __name__ == '__main__':
+    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
     # optional if you are using a GPU
     gpus = tf.config.experimental.list_physical_devices('GPU')
@@ -113,7 +120,8 @@ if __name__ == '__main__':
     # chose start frame
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     out = []
-    for i in range(0, frame_count, 1):
+    #for i in range(0, frame_count, 240):
+    for i in range(0, 240, 240):
 
         cap.set(1, i)
         _, frame = cap.read()
