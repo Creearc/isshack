@@ -95,7 +95,7 @@ if __name__ == '__main__':
   lock = threading.Lock()
 
   video_name = None
-  video_name = 'WIN_20220218_10_07_32_Pro.mp4'
+  video_name = 'пробный урок 18.02.2022 с боку.mp4''
 
   frame_tmp = None
   
