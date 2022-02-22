@@ -97,7 +97,6 @@ def data_prep(keypoints_with_scores, min_conf):
     return data
         
 
-
 if __name__ == '__main__':
 
     # optional if you are using a GPU
