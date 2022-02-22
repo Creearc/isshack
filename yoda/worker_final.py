@@ -38,7 +38,7 @@ def main_thread():
 
       state, old_state = 0, 0
       buf_sec = 0
-      output_file = open('results/fight_result.txt', 'w')
+      output_file = open('fight_result.txt', 'w')
 
       per, old_per = 0, -1
 
@@ -95,7 +95,7 @@ if __name__ == '__main__':
   lock = threading.Lock()
 
   video_name = None
-  video_name = '{}/fight_test.mp4'.format(FOLDER_PATH)
+  video_name = 'WIN_20220218_10_07_32_Pro.mp4'
 
   frame_tmp = None
   
