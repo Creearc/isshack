@@ -109,7 +109,7 @@ if __name__ == '__main__':
     movenet = model.signatures['serving_default']
 
     # set video path
-    video_path = 'D:/exercise_tracker/kio/Копия пробный урок 18.02.2022 с боку.mp4'
+    video_path = 'WIN_20220218_10_07_32_Pro.mp4'
     cap = cv2.VideoCapture(video_path)
     # chose start frame
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
