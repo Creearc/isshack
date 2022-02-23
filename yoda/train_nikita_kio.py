@@ -107,14 +107,16 @@ class NClassifier(nn.Module):
         
         self.tanh = nn.Tanh()
         self.relu = nn.ReLU()
+        self.gelu = nn.GELU()
+        self.silu = nn.SiLU()
         self.dropout = nn.Dropout(p=0.005)
         self.batchnorm = nn.BatchNorm1d(198)
         self.sig = nn.Sigmoid()
         
     def forward(self, inputs):
-        x = self.tanh(self.layer_1(inputs))
+        x = self.silu(self.layer_1(inputs))
         x = self.batchnorm(x)
-        x = self.relu(self.layer_3(x))
+        x = self.gelu(self.layer_3(x))
         x = self.relu(self.layer_5(x))
         x = self.dropout(x)
         x = self.sig(self.layer_out(x))
