@@ -126,14 +126,14 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model = NClassifier()
 model.to(device)
 print(model)
-criterion = nn.CrossEntropyLoss()
+criterion = nn.BCEWithLogitsLoss()
 optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
 
 from sklearn.metrics import f1_score
 
 def score(y_p, y_t):
-    y_pred_tag = torch.round(y_p)
-    return f1_score(y_t.cpu().detach().numpy(),y_pred_tag.cpu().detach().numpy())
+    return f1_score(y_t.cpu().detach().numpy(),
+                    np.argmax(y_p.cpu().detach().numpy(), axis=1),average='weighted')
 
 
 model.train()
