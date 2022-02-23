@@ -106,7 +106,7 @@ class NClassifier(nn.Module):
         self.tanh = nn.Tanh()
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(p=0.005)
-        self.batchnorm = nn.BatchNorm1d(680)
+        self.batchnorm = nn.BatchNorm1d(132)
         self.sig = nn.Sigmoid()
         
     def forward(self, inputs):
