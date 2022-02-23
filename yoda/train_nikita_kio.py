@@ -50,7 +50,7 @@ df = pd.DataFrame(data = points_arr, columns = nms)
 
 print(df)
 
-X = df.iloc[:, 0:-2]
+X = df.iloc[:, 0:-1]
 y = df.iloc[:, -1]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,stratify = y, random_state=13)
@@ -98,8 +98,8 @@ test_loader = DataLoader(dataset=test_data, batch_size=BATCH_SIZE*40)
 class NClassifier(nn.Module):
     def __init__(self):
         super(NClassifier, self).__init__()
-        self.layer_1 = nn.Linear(66, 134) 
-        self.layer_3 = nn.Linear(134, 66)
+        self.layer_1 = nn.Linear(66, 132) 
+        self.layer_3 = nn.Linear(132, 66)
         self.layer_5 = nn.Linear(66, 10)
         self.layer_out = nn.Linear(10, 2) 
         
