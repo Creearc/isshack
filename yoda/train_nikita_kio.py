@@ -146,9 +146,7 @@ for e in range(1, EPOCHS+1):
         optimizer.zero_grad()
         
         y_pred = model(X_batch)
-        print(y_pred)
-        print(y_batch)
-        
+
         loss = criterion(y_pred, y_batch.long())
         acc = score(y_pred, y_batch)
         
