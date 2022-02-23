@@ -23,15 +23,13 @@ classes = []
 
 points_arr = []
 classes_arr = []
-CLASSES_NUM = 2
+CLASSES_NUM = 3
 
 for i in range(len(s)):
   ann = s[i].split(' ')
   frame_number = int(ann[0])
   if frame_number in arrs.keys():
     cl = ann[1][:-1]
-    if cl == 'None':
-      continue
     if not (cl in classes):
       classes.append(cl)
     cl = classes.index(cl)
@@ -102,21 +100,21 @@ test_loader = DataLoader(dataset=test_data, batch_size=BATCH_SIZE*40)
 class NClassifier(nn.Module):
     def __init__(self):
         super(NClassifier, self).__init__()
-        self.layer_1 = nn.Linear(66, 132) 
-        self.layer_3 = nn.Linear(132, 66)
-        self.layer_5 = nn.Linear(66, 10)
-        self.layer_out = nn.Linear(10, 3) 
+        self.layer_1 = nn.Linear(66, 198) 
+        self.layer_3 = nn.Linear(198, 132)
+        self.layer_5 = nn.Linear(132, 66)
+        self.layer_out = nn.Linear(66, 3) 
         
         self.tanh = nn.Tanh()
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(p=0.005)
-        self.batchnorm = nn.BatchNorm1d(132)
+        self.batchnorm = nn.BatchNorm1d(198)
         self.sig = nn.Sigmoid()
         
     def forward(self, inputs):
-        x = self.relu(self.layer_1(inputs))
+        x = self.tanh(self.layer_1(inputs))
         x = self.batchnorm(x)
-        x = self.tanh(self.layer_3(x))
+        x = self.relu(self.layer_3(x))
         x = self.relu(self.layer_5(x))
         x = self.dropout(x)
         x = self.sig(self.layer_out(x))
@@ -138,17 +136,19 @@ def score(y_p, y_t):
                     np.argmax(y_p.cpu().detach().numpy(), axis=1),average='weighted')
 
 
-model.train()
 for e in range(1, EPOCHS+1):
-    
+    model.train()
     epoch_loss = 0
     epoch_acc = 0
+    epoch_loss_valid = 0
+    epoch_acc_valid = 0
+    
     for X_batch, y_batch in train_loader:
         X_batch, y_batch = X_batch.to(device), y_batch.to(device)
         optimizer.zero_grad()
         
         y_pred = model(X_batch)
-
+        #print(y_pred.cpu().detach().numpy())
         loss = criterion(y_pred, y_batch.long())
         acc = score(y_pred, y_batch)
         
@@ -158,9 +158,20 @@ for e in range(1, EPOCHS+1):
         epoch_loss += loss.item()
         epoch_acc += acc.item()
         
+    model.eval()
+    for X_batch, y_batch in test_loader:
+        X_batch, y_batch = X_batch.to(device), y_batch.to(device)
+        
+        y_pred = model(X_batch)
+        
+        loss_valid = criterion(y_pred, y_batch.long())
+        acc_valid = score(y_pred, y_batch)
+        
+        epoch_loss_valid += loss.item()
+        epoch_acc_valid += acc.item()
+        
 
-    print(f'Epoch {e+0:03}: | Loss: {epoch_loss/len(train_loader):.5f} | F1: {epoch_acc/len(train_loader):.3f}')
-
+    print(f'Epoch {e+0:03}: | Loss_train: {epoch_loss/len(train_loader):.5f} | F1_train: {epoch_acc/len(train_loader):.3f}| Loss_valid: {epoch_loss_valid/len(test_loader):.5f} | F1_valid: {epoch_acc_valid/len(test_loader):.3f}')
 
 torch.save(model.state_dict(), 'saved_model.pth')
 
