@@ -42,8 +42,7 @@ trained_model.to(device)
 def run(kp):
     global trained_model
     trained_model.eval()
-    kp = prep_ds(kp)
     res = trained_model(torch.FloatTensor([kp]))
-    return torch.round(res).detach().numpy()[0][0]
+    return np.argmax((res).detach().numpy(),axis=1)[0]
 
 
