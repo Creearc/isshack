@@ -43,7 +43,7 @@ for i in range(len(s)):
 
 nms = []
 
-for i in range(len(points_arr[0]) - 1):
+for i in range(len(points_arr[0]) - CLASSES_NUM):
   nms.append('X{}'.format(i))
 
 for i in range(CLASSES_NUM):
