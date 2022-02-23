@@ -149,8 +149,8 @@ for e in range(1, EPOCHS+1):
         print(y_pred)
         print(y_batch)
         
-        loss = criterion(y_pred, y_batch.unsqueeze(1))
-        acc = score(y_pred, y_batch.unsqueeze(1))
+        loss = criterion(y_pred, y_batch.long())
+        acc = score(y_pred, y_batch)
         
         loss.backward()
         optimizer.step()
