@@ -100,10 +100,10 @@ test_loader = DataLoader(dataset=test_data, batch_size=BATCH_SIZE*40)
 class NClassifier(nn.Module):
     def __init__(self):
         super(NClassifier, self).__init__()
-        self.layer_1 = nn.Linear(66, 132) 
-        self.layer_3 = nn.Linear(132, 66)
-        self.layer_5 = nn.Linear(66, 10)
-        self.layer_out = nn.Linear(10, 3) 
+        self.layer_1 = nn.Linear(66, 198) 
+        self.layer_3 = nn.Linear(198, 132)
+        self.layer_5 = nn.Linear(132, 66)
+        self.layer_out = nn.Linear(66, 3) 
         
         self.tanh = nn.Tanh()
         self.relu = nn.ReLU()
