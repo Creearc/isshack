@@ -64,6 +64,7 @@ def main_thread():
         if key_points is None:
           continue        
         state = nikita_net.run(key_points)
+        print(state)
 
         if state == 1:
           cv2.putText(frame, 'ALARM!', (70, 70), cv2.FONT_HERSHEY_SIMPLEX, 1.6,

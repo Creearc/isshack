@@ -7,22 +7,22 @@ import torch.nn as nn
 class NClassifier(nn.Module):
     def __init__(self):
         super(NClassifier, self).__init__()
-        self.layer_1 = nn.Linear(340, 680) 
-        self.layer_3 = nn.Linear(680, 340)
-        self.layer_5 = nn.Linear(340, 10)
-        self.layer_out = nn.Linear(10, 1) 
+        self.layer_1 = nn.Linear(66, 132) 
+        self.layer_3 = nn.Linear(132, 66)
+        self.layer_5 = nn.Linear(66, 10)
+        self.layer_out = nn.Linear(10, 3) 
         
         self.tanh = nn.Tanh()
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(p=0.005)
-        self.batchnorm = nn.BatchNorm1d(680)
+        self.batchnorm = nn.BatchNorm1d(132)
         self.sig = nn.Sigmoid()
         
     def forward(self, inputs):
         x = self.relu(self.layer_1(inputs))
         x = self.batchnorm(x)
         x = self.tanh(self.layer_3(x))
-        x = self.tanh(self.layer_5(x))
+        x = self.relu(self.layer_5(x))
         x = self.dropout(x)
         x = self.sig(self.layer_out(x))
         
@@ -44,6 +44,6 @@ def run(kp):
     trained_model.eval()
     kp = prep_ds(kp)
     res = trained_model(torch.FloatTensor([kp]))
-    return int(torch.round(res).detach().numpy()[0][0])
+    return torch.round(res).detach().numpy()[0][0]
 
 
