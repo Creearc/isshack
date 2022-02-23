@@ -23,6 +23,7 @@ classes = []
 
 points_arr = []
 classes_arr = []
+CLASSES_NUM = 3
 
 for i in range(len(s)):
   ann = s[i].split(' ')
@@ -38,20 +39,22 @@ for i in range(len(s)):
     for elem in points:
       for coord in elem:
         coords.append(coord)
-    points_arr.append(coords + [cl])
+    points_arr.append(coords + [1 if i == cl else 0 for i in range(CLASSES_NUM)])
 
 nms = []
 
-for i in range(len(points_arr[0]) - 1):
+for i in range(len(points_arr[0]) - CLASSES_NUM):
   nms.append('X{}'.format(i))
-nms.append('class')              
+
+for i in range(CLASSES_NUM):
+  nms.append('Class_{}'.format(i))              
 
 df = pd.DataFrame(data = points_arr, columns = nms)
 
 print(df)
 
-X = df.iloc[:, 0:-2]
-y = df.iloc[:, -1]
+X = df.iloc[:, 0:-CLASSES_NUM]
+y = df.iloc[:, -CLASSES_NUM]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,stratify = y, random_state=13)
 
@@ -98,15 +101,15 @@ test_loader = DataLoader(dataset=test_data, batch_size=BATCH_SIZE*40)
 class NClassifier(nn.Module):
     def __init__(self):
         super(NClassifier, self).__init__()
-        self.layer_1 = nn.Linear(66, 134) 
-        self.layer_3 = nn.Linear(134, 66)
+        self.layer_1 = nn.Linear(66, 132) 
+        self.layer_3 = nn.Linear(132, 66)
         self.layer_5 = nn.Linear(66, 10)
-        self.layer_out = nn.Linear(10, 2) 
+        self.layer_out = nn.Linear(10, 3) 
         
         self.tanh = nn.Tanh()
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(p=0.005)
-        self.batchnorm = nn.BatchNorm1d(680)
+        self.batchnorm = nn.BatchNorm1d(132)
         self.sig = nn.Sigmoid()
         
     def forward(self, inputs):
@@ -124,7 +127,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model = NClassifier()
 model.to(device)
 print(model)
-criterion = nn.BCEWithLogitsLoss()
+criterion = nn.BCELoss()
 optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
 
 from sklearn.metrics import f1_score
