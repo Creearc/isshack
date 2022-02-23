@@ -117,7 +117,7 @@ class NClassifier(nn.Module):
         x = self.relu(self.layer_1(inputs))
         x = self.batchnorm(x)
         x = self.tanh(self.layer_3(x))
-        x = self.tanh(self.layer_5(x))
+        x = self.relu(self.layer_5(x))
         x = self.dropout(x)
         x = self.sig(self.layer_out(x))
         
