@@ -57,9 +57,9 @@ def main_thread():
         if frame is None:
           continue
         
-        frame, _, _ = detector.findPose(image, draw=False)
-        lmList = detector.findPosition(image, draw=False)
-        key_points = detector.recalculate_lm(image, draw=True)
+        frame, _, _ = detector.findPose(frame, draw=False)
+        lmList = detector.findPosition(frame, draw=False)
+        key_points = detector.recalculate_lm(frame, draw=True)
 
         if key_points is None:
           continue        
