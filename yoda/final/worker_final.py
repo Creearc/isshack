@@ -56,7 +56,8 @@ def main_thread():
         _, frame = vid_capture.read()
         if frame is None:
           continue
-        
+          
+        frame = rotate_img(frame, 270)
         frame, _, _ = detector.findPose(frame, draw=False)
         lmList = detector.findPosition(frame, draw=False)
         key_points = detector.recalculate_lm(frame, draw=True)
@@ -99,7 +100,7 @@ if __name__ == '__main__':
   detector = dt.poseDetector(modelComplexity=1)
 
   video_name = None
-  video_name = '../WIN_20220218_10_07_32_Pro.mp4'
+  video_name = '../WhatsApp_Video_2022-02-18_at_11_23_05.mp4'
 
   frame_tmp = None
   
