@@ -7,7 +7,7 @@ import pickle
 
 
 from modules import pose_estimation_mp_module as dt
-import nikita_net
+from modules import nikita_net
 
 def server_thread():
   global video_name, frame_tmp, lock
