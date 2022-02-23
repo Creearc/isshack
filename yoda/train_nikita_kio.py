@@ -59,9 +59,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratif
 
 
 
-EPOCHS = 150
+EPOCHS = 1500
 BATCH_SIZE = 512
-LEARNING_RATE = 0.000001
+LEARNING_RATE = 0.0000001
 
 
 class LoadData(Dataset):
