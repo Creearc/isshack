@@ -56,7 +56,7 @@ print(df)
 X = df.iloc[:, 0:-CLASSES_NUM]
 y = df.iloc[:, -CLASSES_NUM]
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,stratify = y, random_state=13)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify = y, random_state=13)
 
 
 
@@ -147,6 +147,7 @@ for e in range(1, EPOCHS+1):
         optimizer.zero_grad()
         
         y_pred = model(X_batch)
+        print(y_pred)
         
         loss = criterion(y_pred, y_batch.unsqueeze(1))
         acc = score(y_pred, y_batch.unsqueeze(1))
