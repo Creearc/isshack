@@ -98,7 +98,7 @@ def main_thread():
 if __name__ == '__main__':
   FOLDER_PATH = '../train'
   lock = threading.Lock()
-  detector = poseDetector(modelComplexity=1)
+  detector = dt.poseDetector(modelComplexity=1)
 
   video_name = None
   video_name = 'WIN_20220218_10_07_32_Pro.mp4'
