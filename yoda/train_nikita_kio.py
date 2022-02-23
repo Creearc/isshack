@@ -103,7 +103,7 @@ class NClassifier(nn.Module):
         self.layer_1 = nn.Linear(66, 198) 
         self.layer_3 = nn.Linear(198, 132)
         self.layer_5 = nn.Linear(132, 66)
-        self.layer_out = nn.Linear(66, 3) 
+        self.layer_out = nn.Linear(66, 2) 
         
         self.tanh = nn.Tanh()
         self.relu = nn.ReLU()
@@ -117,7 +117,7 @@ class NClassifier(nn.Module):
         x = self.silu(self.layer_1(inputs))
         x = self.batchnorm(x)
         x = self.gelu(self.layer_3(x))
-        x = self.relu(self.layer_5(x))
+        x = self.tanh(self.layer_5(x))
         x = self.dropout(x)
         x = self.sig(self.layer_out(x))
         
