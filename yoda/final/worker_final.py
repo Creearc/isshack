@@ -56,8 +56,8 @@ def main_thread():
         _, frame = vid_capture.read()
         if frame is None:
           continue
-          
-        frame = rotate_img(frame, 270)
+
+        frame = dt.rotate_img(frame, 270)
         frame, _, _ = detector.findPose(frame, draw=False)
         lmList = detector.findPosition(frame, draw=False)
         key_points = detector.recalculate_lm(frame, draw=True)
