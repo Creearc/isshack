@@ -23,6 +23,7 @@ classes = []
 
 points_arr = []
 classes_arr = []
+CLASSES_NUM = 3
 
 for i in range(len(s)):
   ann = s[i].split(' ')
@@ -38,7 +39,7 @@ for i in range(len(s)):
     for elem in points:
       for coord in elem:
         coords.append(coord)
-    points_arr.append(coords + [cl])
+    points_arr.append(coords + [1 if i == cl else 0 for i in range(CLASSES_NUM)])
 
 nms = []
 
@@ -50,8 +51,8 @@ df = pd.DataFrame(data = points_arr, columns = nms)
 
 print(df)
 
-X = df.iloc[:, 0:-1]
-y = df.iloc[:, -1]
+X = df.iloc[:, 0:-CLASSES_NUM]
+y = df.iloc[:, -CLASSES_NUM]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,stratify = y, random_state=13)
 
@@ -145,7 +146,7 @@ for e in range(1, EPOCHS+1):
         
         y_pred = model(X_batch)
         
-        #loss = criterion(y_pred, y_batch.unsqueeze(1))
+        loss = criterion(y_pred, y_batch.unsqueeze(1))
         acc = score(y_pred, y_batch.unsqueeze(1))
         
         loss.backward()
