@@ -61,7 +61,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratif
 
 
 
-EPOCHS = 1500
+EPOCHS = 15000
 BATCH_SIZE = 512
 LEARNING_RATE = 0.0000001
 
