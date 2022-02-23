@@ -45,7 +45,9 @@ nms = []
 
 for i in range(len(points_arr[0]) - 1):
   nms.append('X{}'.format(i))
-nms.append('class')              
+
+for i in range(CLASSES_NUM):
+  nms.append('Class_{}'.format(i))              
 
 df = pd.DataFrame(data = points_arr, columns = nms)
 
