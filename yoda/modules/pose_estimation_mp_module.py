@@ -93,7 +93,7 @@ class poseDetector():
             self.rc_lmList.append([new_cx, new_cy])
             #self.rc_lmList.append([id, new_cx, new_cy])
             if draw:
-                cv2.circle(image, (new_cx+middle_point[0], new_cy+middle_point[1]),fontScale,(255,0,0),cv2.FILLED)
+                cv2.circle(image, (new_cx+middle_point[0], new_cy+middle_point[1]),fontScale,(0,255,0),cv2.FILLED)
 
         self.coords = []
         for elem in self.rc_lmList:
