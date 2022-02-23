@@ -1,9 +1,9 @@
 
-##import torch
-##import torch.nn as nn
-##import torch.optim as optim
-##import torch.nn.functional as F 
-##from torch.utils.data import Dataset, DataLoader
+import torch
+import torch.nn as nn
+import torch.optim as optim
+import torch.nn.functional as F 
+from torch.utils.data import Dataset, DataLoader
 
 from sklearn.model_selection import train_test_split
 
@@ -47,6 +47,8 @@ for i in range(len(points_arr[0]) - 1):
 nms.append('class')              
 
 df = pd.DataFrame(data = points_arr, columns = nms)
+
+print(df)
 
 X = df.iloc[:, 0:-2]
 y = df.iloc[:, -1]
@@ -96,10 +98,10 @@ test_loader = DataLoader(dataset=test_data, batch_size=BATCH_SIZE*40)
 class NClassifier(nn.Module):
     def __init__(self):
         super(NClassifier, self).__init__()
-        self.layer_1 = nn.Linear(340, 680) 
-        self.layer_3 = nn.Linear(680, 340)
-        self.layer_5 = nn.Linear(340, 10)
-        self.layer_out = nn.Linear(10, 1) 
+        self.layer_1 = nn.Linear(66, 134) 
+        self.layer_3 = nn.Linear(134, 66)
+        self.layer_5 = nn.Linear(66, 10)
+        self.layer_out = nn.Linear(10, 2) 
         
         self.tanh = nn.Tanh()
         self.relu = nn.ReLU()
