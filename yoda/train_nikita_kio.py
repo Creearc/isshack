@@ -39,21 +39,22 @@ for i in range(len(s)):
     for elem in points:
       for coord in elem:
         coords.append(coord)
-    points_arr.append(coords + [[1 if i == cl else 0 for i in range(CLASSES_NUM)]])
+    points_arr.append(coords + [1 if i == cl else 0 for i in range(CLASSES_NUM)])
 
 nms = []
 
-for i in range(len(points_arr[0]) - 1):
+for i in range(len(points_arr[0]) - CLASSES_NUM):
   nms.append('X{}'.format(i))
 
-nms.append('Class')              
+for i in range(CLASSES_NUM):
+  nms.append('Class_{}'.format(i))              
 
 df = pd.DataFrame(data = points_arr, columns = nms)
 
 print(df)
 
-X = df.iloc[:, 0:-1]
-y = df.iloc[:, -1]
+X = df.iloc[:, 0:-CLASSES_NUM]
+y = df.iloc[:, -CLASSES_NUM]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify = y, random_state=13)
 
@@ -126,7 +127,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model = NClassifier()
 model.to(device)
 print(model)
-criterion = nn.BCELoss()
+criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
 
 from sklearn.metrics import f1_score
