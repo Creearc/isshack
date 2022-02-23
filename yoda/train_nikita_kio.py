@@ -39,22 +39,21 @@ for i in range(len(s)):
     for elem in points:
       for coord in elem:
         coords.append(coord)
-    points_arr.append(coords + [1 if i == cl else 0 for i in range(CLASSES_NUM)])
+    points_arr.append(coords + [cl])
 
 nms = []
 
-for i in range(len(points_arr[0]) - CLASSES_NUM):
+for i in range(len(points_arr[0]) - 1):
   nms.append('X{}'.format(i))
 
-for i in range(CLASSES_NUM):
-  nms.append('Class_{}'.format(i))              
+nms.append('Class')              
 
 df = pd.DataFrame(data = points_arr, columns = nms)
 
 print(df)
 
-X = df.iloc[:, 0:-CLASSES_NUM]
-y = df.iloc[:, -CLASSES_NUM]
+X = df.iloc[:, 0:-1]
+y = df.iloc[:, -1]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify = y, random_state=13)
 
