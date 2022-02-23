@@ -23,13 +23,15 @@ classes = []
 
 points_arr = []
 classes_arr = []
-CLASSES_NUM = 3
+CLASSES_NUM = 2
 
 for i in range(len(s)):
   ann = s[i].split(' ')
   frame_number = int(ann[0])
   if frame_number in arrs.keys():
     cl = ann[1][:-1]
+    if cl == 'None':
+      continue
     if not (cl in classes):
       classes.append(cl)
     cl = classes.index(cl)
