@@ -101,7 +101,7 @@ class NClassifier(nn.Module):
         self.layer_1 = nn.Linear(66, 132) 
         self.layer_3 = nn.Linear(132, 66)
         self.layer_5 = nn.Linear(66, 10)
-        self.layer_out = nn.Linear(10, 2) 
+        self.layer_out = nn.Linear(10, 3) 
         
         self.tanh = nn.Tanh()
         self.relu = nn.ReLU()
@@ -145,8 +145,8 @@ for e in range(1, EPOCHS+1):
         
         y_pred = model(X_batch)
         
-        loss = criterion(y_pred, y_batch.unsqueeze(1))
-        acc = score(y_pred, y_batch.unsqueeze(1))
+        loss = criterion(y_pred, y_batch.unsqueeze(3))
+        acc = score(y_pred, y_batch.unsqueeze(3))
         
         loss.backward()
         optimizer.step()
