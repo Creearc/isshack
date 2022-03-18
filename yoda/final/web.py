@@ -34,7 +34,7 @@ def generate():
 
 
 if __name__ == '__main__':
-  rec = zmq_module.ZMQ_receiver('192.168.68.200', 5005)
+  rec = zmq_module.ZMQ_receiver('192.168.68.205', 5005)
   rec.run()
   
   app.run(host='0.0.0.0', port=58800, debug=False, threaded=True, use_reloader=False)
