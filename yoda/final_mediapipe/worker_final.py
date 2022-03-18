@@ -9,20 +9,8 @@ import pickle
 from modules import pose_estimation_mp_module as dt
 from modules import nikita_net
 
-def server_thread():
-  global video_name, frame_tmp, lock
-
-  context = zmq.Context()
-  socket = context.socket(zmq.REP)
-  socket.bind("tcp://0.0.0.0:{}".format(5001))
-  
-  while True:
-    msg = socket.recv()
-    with lock:
-      tmp = frame_tmp
-    msg = pickle.dumps(tmp)
-    socket.send(msg, zmq.NOBLOCK)  
-      
+import zmq_module
+     
     
 def main_thread():
   global video_name, frame_tmp, lock
@@ -78,8 +66,7 @@ def main_thread():
           buf_sec = sec
         old_state = state
         
-        with lock:
-          frame_tmp = frame.copy()
+        serv.put_img(frame)
           
       with lock:
         video_name = None
@@ -105,4 +92,7 @@ if __name__ == '__main__':
   frame_tmp = None
   
   threading.Thread(target=main_thread, args=()).start()
-  threading.Thread(target=server_thread, args=()).start()
+
+  serv = zmq_module.ZMQ_transfer('0.0.0.0', 5005)
+  serv.run()
+  
