@@ -1,5 +1,5 @@
 import tensorflow as tf
-import tensorflow_hub as hub
+#import tensorflow_hub as hub
 import cv2
 #from matplotlib import pyplot as plt
 import numpy as np
@@ -117,7 +117,7 @@ def rotate_img(img, angle):
 
 if __name__ == '__main__':
     # set video path
-    video_path = 'WhatsApp Video 2022-02-18 at 11.23.05.mp4'
+    video_path = 'D:/exercise_tracker/kio/WhatsApp_Video_2022-02-18_at_11_23_05.mp4'
     cap = cv2.VideoCapture(video_path)
     # chose start frame
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
