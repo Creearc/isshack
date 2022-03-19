@@ -8,6 +8,8 @@ import pickle
 import pprint
 import functions
 
+import time
+
 EDGES = {
     (0, 1): 'm',
     (0, 2): 'c',
@@ -35,7 +37,29 @@ EDGES = {
         
 # load MoveNet model
 
-interpreter = tf.lite.Interpreter(model_path="lite-model_movenet_singlepose_lightning_tflite_int8_4.tflite")
+model = 1
+
+if model == 0:
+    interpreter = tf.lite.Interpreter(model_path="lite-model_movenet_singlepose_lightning_tflite_int8_4.tflite")
+    SHAPE = (192, 192)
+    ASTYPE = 'uint8'
+elif model == 1:
+    interpreter = tf.lite.Interpreter(model_path="lite-model_movenet_singlepose_lightning_tflite_float16_4.tflite")
+    SHAPE = (192, 192)
+    ASTYPE = 'uint8'
+elif model == 2:
+    interpreter = tf.lite.Interpreter(model_path="lite-model_movenet_singlepose_thunder_tflite_int8_4.tflite")
+    SHAPE = (256, 256)
+    ASTYPE = 'uint8'
+elif model == 3:
+    interpreter = tf.lite.Interpreter(model_path="lite-model_movenet_singlepose_thunder_tflite_float16_4.tflite")
+    SHAPE = (256, 256)
+    ASTYPE = 'uint8'
+elif model == 4:
+    interpreter = tf.lite.Interpreter(model_path="posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite")
+    SHAPE = (257, 257)
+    ASTYPE = 'float32'
+    
 interpreter.allocate_tensors()
 
 input_details = interpreter.get_input_details()
@@ -70,24 +94,21 @@ def draw_connections(frame, keypoints, edges, confidence_threshold):
 
 def detect(image):
 
-    resize_img = cv2.resize(image, (192, 192), interpolation=cv2.INTER_CUBIC)
-    #reshape_image = resize_img.reshape(192, 192, 3)    
+    resize_img = cv2.resize(image, (SHAPE), interpolation=cv2.INTER_CUBIC)
     image_np_expanded = np.expand_dims(resize_img, axis=0)
-    image_np_expanded = image_np_expanded.astype('uint8')
+    image_np_expanded = image_np_expanded.astype(ASTYPE)
     
     interpreter.set_tensor(input_details[0]['index'], image_np_expanded) 
     
     # Detection section
+    tt = time.time()
     interpreter.invoke()
+    #print(1 / (time.time() - t))
     keypoints_with_scores = interpreter.get_tensor(output_details[0]['index'])
-    #print(keypoints_with_scores)
-    new_kp_frame = data_prep(keypoints_with_scores, 0.2)
-    #print(keypoints_with_scores)
-    
-    # Render keypoints 
+
     loop_through_people(image, keypoints_with_scores, EDGES, 0.2)
 
-    return image, new_kp_frame
+    return image
 
 def data_prep(keypoints_with_scores, min_conf):
     new_kp_frame = []
@@ -96,7 +117,6 @@ def data_prep(keypoints_with_scores, min_conf):
         mean_conf = 0
         people = []
         for kp in person[0]:
-            #print(kp)
             ky, kx, kp_conf = kp
             mean_conf = mean_conf + kp_conf
             people.append([ky, kx]) 
@@ -116,27 +136,28 @@ def rotate_img(img, angle):
     return cv2.warpAffine(img, M, (w, h))
 
 if __name__ == '__main__':
+<<<<<<< Updated upstream
     # set video path
     video_path = 'D:/exercise_tracker/kio/WhatsApp_Video_2022-02-18_at_11_23_05.mp4'
+=======
+    video_path = 'WhatsApp Video 2022-02-26 at 00.46.41.mp4'
+>>>>>>> Stashed changes
     cap = cv2.VideoCapture(video_path)
-    # chose start frame
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     out = []
-    #for i in range(0, frame_count, 240):
-    for i in range(100, frame_count, 1):
-        print(i)
+    for i in range(0, frame_count, 1):
+        t = time.time()
         cap.set(1, i)
         _, frame = cap.read()
         if frame is None:
             print('Err: frame is None')
             continue
 
-        frame = rotate_img(frame, 270)
+        #frame = rotate_img(frame, 270)
+        #frame = frame[150 : -150, :]
 
-        frame, new_kp_frame = detect(frame)
-        #pprint.pprint(new_kp_frame)
-        
-        # Render keypoints 
+        frame = detect(frame)
+        print(1 / (time.time() - t))
         cv2.imshow('Movenet Multipose', frame)
         
         if cv2.waitKey(1) & 0xFF==ord('q'):

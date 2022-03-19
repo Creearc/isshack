@@ -8,7 +8,7 @@ class poseDetector():
     
     def __init__(self, mode=False, 
                  smooth=True,
-                 modelComplexity=1, 
+                 modelComplexity=2, 
                  detectionCon=0.5, trackingCon=0.5):
 
         self.mode = mode
@@ -137,9 +137,9 @@ if __name__ == "__main__":
     import pprint
 
     # Video Feed
-    vid_path = 'D:/exercise_tracker/kio/WhatsApp_Video_2022-02-18_at_11_23_05.mp4'
+    vid_path = 'WhatsApp Video 2022-02-26 at 00.46.41.mp4'
     cap = cv2.VideoCapture(vid_path)
-    detector = poseDetector(modelComplexity=1)
+    detector = poseDetector(modelComplexity=0)
 
     
 
